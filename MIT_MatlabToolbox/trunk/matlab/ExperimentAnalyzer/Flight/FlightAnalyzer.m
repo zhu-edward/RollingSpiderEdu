@@ -11,7 +11,7 @@
 % ==================================
 
 
-
+close all
 
 %% Rearrange data
 %Load all parameters
@@ -104,6 +104,27 @@ end;
 %% Plots
 %%-------------
 
+figure;
+plot(RSrun_states_estim(:,1),RSrun_states_estim(:,5:7),'.-'); hold all;
+plot(RSrun_orient_ref(:,1),RSrun_orient_ref(:,2:end));
+legend({'yaw' 'pitch' 'roll' 'yaw_{ref}' 'pitch_{ref}' 'roll_{ref}'},'Location','best');
+ylabel({'orientation $[rad]$'},'Interpreter','latex');
+xlabel({'Time [s]'},'Interpreter','latex');
+
+figure;
+plot(RSrun_motorcommands(:,1),RSrun_motorcommands(:,2:end));
+ylabel({'motor commands'},'Interpreter','latex');
+xlabel({'Time [s]'},'Interpreter','latex');
+legend({'m$_1$' 'm$_2$' 'm$_3$' 'm$_4$'},'Interpreter','latex');
+ylim([-600 600])
+
+figure;
+plot(RSrun_states_estim(:,1),RSrun_states_estim(:,2)); hold on;
+plot(RSrun_states_estim(:,1),RSrun_states_estim(:,3));
+plot(RSrun_states_estim(:,1),RSrun_states_estim(:,4));
+legend({'$\hat{X}$','$\hat{Y}$','$\hat{Z}$'},'Interpreter','latex','Location','best')
+ylabel({'Position [m]'},'Interpreter','latex');
+xlabel({'Time [s]'},'Interpreter','latex');
 
 %% accelerometer, gyro, orientation, motor commands
 visUpdatesAvlble = (RSrun_posVIS(:,2)~=-99);
